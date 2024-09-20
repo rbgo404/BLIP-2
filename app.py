@@ -7,7 +7,7 @@ class InferlessPythonModel:
     def initialize(self):
         model_id = "Salesforce/blip2-flan-t5-xl"
         self.processor = Blip2Processor.from_pretrained(model_id)
-        self.model = Blip2ForConditionalGeneration.from_pretrained(model_id, device_map="auto")
+        self.model = Blip2ForConditionalGeneration.from_pretrained(model_id, device_map="cuda")
 
     def infer(self, inputs):
         prompt = inputs["prompt"]  # Extract the prompt from the input
