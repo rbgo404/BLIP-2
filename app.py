@@ -17,7 +17,7 @@ class InferlessPythonModel:
         inputs = self.processor(raw_image, prompt,return_tensors="pt").to("cuda")
 
         output = self.model.generate(**inputs)
-        output_text = self.processor.decode(out[0], skip_special_tokens=True).strip()
+        output_text = self.processor.decode(output[0], skip_special_tokens=True).strip()
         
         return {"generated_output": output_text}
 
