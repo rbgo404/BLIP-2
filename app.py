@@ -16,8 +16,10 @@ class InferlessPythonModel:
         raw_image = Image.open(requests.get(img_url, stream=True).raw).convert('RGB')
         inputs = self.processor(raw_image, prompt,return_tensors="pt").to("cuda")
 
-        out = self.model.generate(**inputs)
-        return {"generated_result": self.processor.decode(out[0], skip_special_tokens=True).strip()}
+        output = self.model.generate(**inputs)
+        output_text = self.processor.decode(out[0], skip_special_tokens=True).strip()
+        
+        return {"generated_output": output_text}
 
     def finalize(self):
         self.model = None
